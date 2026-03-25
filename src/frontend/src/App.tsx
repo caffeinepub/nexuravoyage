@@ -318,7 +318,7 @@ function HeroSection() {
 
         <ScrollReveal delay={600}>
           <div
-            className="animate-fly-box"
+            className="animate-fly-box hero-stat-box"
             style={{
               border: "1px solid rgba(201,169,110,0.3)",
               background: "rgba(201,169,110,0.04)",
@@ -326,9 +326,22 @@ function HeroSection() {
               textAlign: "center",
               backdropFilter: "blur(10px)",
               minWidth: "200px",
+              transition: "box-shadow 0.4s ease, border-color 0.4s ease",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.boxShadow =
+                "0 0 20px rgba(201,169,110,0.7), 0 0 40px rgba(201,169,110,0.3), inset 0 0 16px rgba(201,169,110,0.1)";
+              el.style.borderColor = "rgba(201,169,110,0.9)";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.boxShadow = "";
+              el.style.borderColor = "rgba(201,169,110,0.3)";
             }}
           >
             <div
+              className="animate-number-grow"
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "80px",
@@ -910,6 +923,7 @@ function PodcastSection() {
             }}
           >
             <div
+              className="corner-shape"
               style={{
                 position: "absolute",
                 top: "16px",
@@ -921,6 +935,7 @@ function PodcastSection() {
               }}
             />
             <div
+              className="corner-shape"
               style={{
                 position: "absolute",
                 top: "16px",
@@ -932,6 +947,7 @@ function PodcastSection() {
               }}
             />
             <div
+              className="corner-shape"
               style={{
                 position: "absolute",
                 bottom: "16px",
@@ -943,6 +959,7 @@ function PodcastSection() {
               }}
             />
             <div
+              className="corner-shape"
               style={{
                 position: "absolute",
                 bottom: "16px",
@@ -1033,12 +1050,14 @@ function PodcastSection() {
               {[1, 2, 3, 4, 5].map((bar) => (
                 <div
                   key={bar}
+                  className="soundwave-bar"
                   style={{
                     width: "4px",
                     height: `${12 + bar * 6}px`,
                     background: "rgba(201,169,110,0.4)",
                     borderRadius: "2px",
                     animation: `soundwave ${0.6 + bar * 0.15}s ease-in-out infinite alternate`,
+                    transition: "box-shadow 0.4s ease, background 0.4s ease",
                   }}
                 />
               ))}
@@ -1257,6 +1276,7 @@ function StatsSection() {
               }}
             >
               <div
+                className="animate-number-grow"
                 style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontWeight: 700,
