@@ -108,7 +108,7 @@ function Navbar() {
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.background = "#c9a96e";
-          setColor(e.currentTarget, "#080808");
+          setColor(e.currentTarget, "#020409");
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.background = "transparent";
@@ -264,7 +264,7 @@ function HeroSection() {
                   fontSize: "11px",
                   fontWeight: 400,
                   letterSpacing: "0.25em",
-                  color: "#080808",
+                  color: "#020409",
                   background: "#c9a96e",
                   textDecoration: "none",
                   textTransform: "uppercase",
@@ -318,6 +318,7 @@ function HeroSection() {
 
         <ScrollReveal delay={600}>
           <div
+            className="animate-fly-box"
             style={{
               border: "1px solid rgba(201,169,110,0.3)",
               background: "rgba(201,169,110,0.04)",
@@ -872,7 +873,7 @@ function PodcastSection() {
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "#c9a96e";
-              setColor(e.currentTarget, "#080808");
+              setColor(e.currentTarget, "#020409");
               e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseLeave={(e) => {
@@ -898,6 +899,7 @@ function PodcastSection() {
         {/* Right column — decorative card */}
         <ScrollReveal delay={250}>
           <div
+            className="animate-fly-box"
             style={{
               border: "1px solid rgba(201,169,110,0.25)",
               background: "rgba(201,169,110,0.04)",
@@ -1508,6 +1510,275 @@ function QuoteSection() {
   );
 }
 
+// ── Visitor Signup Section ─────────────────────────────────────────────────
+function VisitorSignupSection() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+
+  const inputStyle = (field: string) => ({
+    width: "100%",
+    padding: "14px 18px",
+    background: "rgba(201,169,110,0.05)",
+    border: `1px solid ${focusedField === field ? "rgba(201,169,110,0.7)" : "rgba(201,169,110,0.25)"}`,
+    color: "rgba(232,232,232,0.9)",
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "16px",
+    fontWeight: 300,
+    outline: "none",
+    transition: "border-color 0.3s ease",
+    boxSizing: "border-box" as const,
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name) return;
+    setSubmittedName(name);
+    setSubmitted(true);
+  };
+
+  return (
+    <section
+      id="visitor-signup"
+      style={{
+        padding: "100px 48px",
+        position: "relative",
+        zIndex: 1,
+        borderTop: "1px solid rgba(201,169,110,0.1)",
+      }}
+    >
+      <ScrollReveal>
+        <div
+          style={{ maxWidth: "640px", margin: "0 auto", textAlign: "center" }}
+        >
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "11px",
+              letterSpacing: "0.4em",
+              color: "#c9a96e",
+              textTransform: "uppercase",
+              marginBottom: "20px",
+            }}
+          >
+            JOIN THE VOYAGE
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 700,
+              fontSize: "clamp(36px, 5vw, 60px)",
+              color: "rgba(232,232,232,0.95)",
+              marginBottom: "20px",
+              lineHeight: 1.15,
+            }}
+          >
+            Leave Your Mark
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "14px",
+              background: "rgba(201,169,110,0.07)",
+              border: "1px solid rgba(201,169,110,0.25)",
+              borderLeft: "3px solid rgba(201,169,110,0.7)",
+              borderRadius: "4px",
+              padding: "18px 24px",
+              marginBottom: "32px",
+              marginTop: "8px",
+            }}
+          >
+            <span style={{ fontSize: "20px", marginTop: "1px", flexShrink: 0 }}>
+              🔒
+            </span>
+            <p
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 400,
+                fontSize: "15px",
+                lineHeight: 1.75,
+                color: "rgba(201,169,110,0.85)",
+                margin: 0,
+              }}
+            >
+              <strong style={{ fontWeight: 600, color: "rgba(201,169,110,1)" }}>
+                I promise you — this is a safe space.
+              </strong>{" "}
+              I'm Prisha, and I built this site because I genuinely care about
+              awareness and truth. I'm not here to collect your data or sell
+              your name. I simply want to know who is walking this path
+              alongside me. No spam, no third-party sharing — just a name, kept
+              close and respected. You have my word.
+            </p>
+          </div>
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 300,
+              fontSize: "17px",
+              lineHeight: 1.8,
+              color: "rgba(232,232,232,0.5)",
+              marginBottom: "56px",
+            }}
+          >
+            Introduce yourself. Your identity remains yours — we simply want to
+            know who walks through these doors.
+          </p>
+
+          {submitted ? (
+            <div
+              data-ocid="visitor_signup.success_state"
+              style={{
+                padding: "60px 40px",
+                border: "1px solid rgba(201,169,110,0.3)",
+                background: "rgba(201,169,110,0.04)",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'Bodoni Moda', 'Bodoni MT', 'Didot', serif",
+                  fontSize: "clamp(28px, 4vw, 48px)",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  color: "#c9a96e",
+                  textShadow:
+                    "0 0 30px rgba(201,169,110,0.6), 0 0 60px rgba(201,169,110,0.3)",
+                  marginBottom: "16px",
+                  textTransform: "uppercase",
+                }}
+              >
+                WELCOME, {submittedName}.
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "15px",
+                  fontWeight: 300,
+                  color: "rgba(232,232,232,0.4)",
+                  letterSpacing: "0.15em",
+                }}
+              >
+                Your presence has been noted.
+              </p>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              data-ocid="visitor_signup.modal"
+              style={{ textAlign: "left" }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                }}
+              >
+                <div>
+                  <label
+                    htmlFor="visitor-name"
+                    style={{
+                      display: "block",
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: "11px",
+                      letterSpacing: "0.3em",
+                      color: "rgba(201,169,110,0.7)",
+                      textTransform: "uppercase",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    Name *
+                  </label>
+                  <input
+                    id="visitor-name"
+                    data-ocid="visitor_signup.input"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    onFocus={() => setFocusedField("name")}
+                    onBlur={() => setFocusedField(null)}
+                    placeholder="Your name"
+                    required
+                    style={inputStyle("name")}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="visitor-message"
+                    style={{
+                      display: "block",
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: "11px",
+                      letterSpacing: "0.3em",
+                      color: "rgba(201,169,110,0.7)",
+                      textTransform: "uppercase",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    Message (optional)
+                  </label>
+                  <textarea
+                    id="visitor-message"
+                    data-ocid="visitor_signup.textarea"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onFocus={() => setFocusedField("message")}
+                    onBlur={() => setFocusedField(null)}
+                    placeholder="Say something, or don’t…"
+                    rows={4}
+                    style={{
+                      ...inputStyle("message"),
+                      resize: "vertical" as const,
+                    }}
+                  />
+                </div>
+                <button
+                  data-ocid="visitor_signup.submit_button"
+                  type="submit"
+                  style={{
+                    marginTop: "12px",
+                    padding: "16px 48px",
+                    background: "transparent",
+                    border: "1px solid #c9a96e",
+                    color: "#c9a96e",
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    letterSpacing: "0.35em",
+                    textTransform: "uppercase",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    display: "block",
+                    width: "100%",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background =
+                      "rgba(201,169,110,0.1)";
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                      "0 0 20px rgba(201,169,110,0.2)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background =
+                      "transparent";
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                      "none";
+                  }}
+                >
+                  ENTER THE VOYAGE
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </ScrollReveal>
+    </section>
+  );
+}
+
 // ── Footer ────────────────────────────────────────────────────────────────────
 function Footer() {
   const navLinks = [
@@ -1517,6 +1788,7 @@ function Footer() {
     "Podcast",
     "Protect Yourself",
     "Contact",
+    "Join the Voyage",
   ];
   return (
     <footer
@@ -1762,7 +2034,7 @@ export default function App() {
   return (
     <div
       style={{
-        background: "#080808",
+        background: "#020409",
         minHeight: "100vh",
         position: "relative",
       }}
@@ -1788,6 +2060,7 @@ export default function App() {
           <StatsSection />
           <ProtectSection />
           <QuoteSection />
+          <VisitorSignupSection />
         </main>
         <Footer />
       </div>

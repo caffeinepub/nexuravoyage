@@ -5,19 +5,19 @@
 @layer base {
   :root {
     --radius: 0.25rem;
-    /* Near-black background #080808 */
-    --background: 0.08 0 0;
+    /* Deep black-blue background */
+    --background: 0.06 0.02 260;
     --foreground: 0.92 0 0;
-    --card: 0.1 0 0;
+    --card: 0.08 0.015 250;
     --card-foreground: 0.92 0 0;
-    --popover: 0.1 0 0;
+    --popover: 0.08 0.015 250;
     --popover-foreground: 0.92 0 0;
     /* Gold #c9a96e → oklch(0.73 0.10 75) */
     --primary: 0.73 0.1 75;
     --primary-foreground: 0.06 0 0;
-    --secondary: 0.12 0 0;
+    --secondary: 0.1 0.015 250;
     --secondary-foreground: 0.92 0 0;
-    --muted: 0.12 0 0;
+    --muted: 0.1 0.015 250;
     --muted-foreground: 0.55 0 0;
     --accent: 0.73 0.1 75;
     --accent-foreground: 0.06 0 0;
@@ -33,11 +33,11 @@
     --chart-3: 0.398 0.07 227.392;
     --chart-4: 0.828 0.189 84.429;
     --chart-5: 0.769 0.188 70.08;
-    --sidebar: 0.08 0 0;
+    --sidebar: 0.06 0.02 260;
     --sidebar-foreground: 0.92 0 0;
     --sidebar-primary: 0.73 0.1 75;
     --sidebar-primary-foreground: 0.06 0 0;
-    --sidebar-accent: 0.12 0 0;
+    --sidebar-accent: 0.1 0.015 250;
     --sidebar-accent-foreground: 0.92 0 0;
     --sidebar-border: 0.73 0.1 75 / 20%;
     --sidebar-ring: 0.73 0.1 75;
@@ -53,7 +53,7 @@
   }
 
   body {
-    background-color: #080808;
+    background-color: #020409;
     color: #e8e8e8;
     cursor: none;
     overflow-x: hidden;
@@ -68,7 +68,7 @@
     width: 4px;
   }
   ::-webkit-scrollbar-track {
-    background: #080808;
+    background: #020409;
   }
   ::-webkit-scrollbar-thumb {
     background: #c9a96e44;
@@ -197,4 +197,31 @@
 }
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+@keyframes fly-box {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    box-shadow: 0 4px 20px rgba(201, 169, 110, 0.1);
+  }
+  25% {
+    transform: translateY(-18px) rotate(-1.5deg);
+    box-shadow: 0 24px 40px rgba(201, 169, 110, 0.22);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.8deg);
+    box-shadow: 0 16px 32px rgba(201, 169, 110, 0.16);
+  }
+  75% {
+    transform: translateY(-20px) rotate(-0.8deg);
+    box-shadow: 0 28px 48px rgba(201, 169, 110, 0.25);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    box-shadow: 0 4px 20px rgba(201, 169, 110, 0.1);
+  }
+}
+
+.animate-fly-box {
+  animation: fly-box 4s ease-in-out infinite;
 }
