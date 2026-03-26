@@ -4,6 +4,7 @@ import { CustomCursor } from "./components/CustomCursor";
 import { Loader } from "./components/Loader";
 import { ScrollReveal } from "./components/ScrollReveal";
 import { StarfieldCanvas } from "./components/StarfieldCanvas";
+import { useActor } from "./hooks/useActor";
 
 function setColor(el: HTMLElement, color: string) {
   el.style.color = color;
@@ -1799,6 +1800,151 @@ function VisitorSignupSection() {
   );
 }
 
+// ── Voices of the Voyage ────────────────────────────────────────────────────
+function VoicesSection() {
+  const { actor, isFetching } = useActor();
+  const [messages, setMessages] = useState<
+    Array<{ name: string; email: string; message: string }>
+  >([]);
+
+  useEffect(() => {
+    if (!actor || isFetching) return;
+    actor
+      .getAllMessages()
+      .then((all) => {
+        setMessages(all.filter((m) => m.message.trim() !== ""));
+      })
+      .catch(() => {});
+  }, [actor, isFetching]);
+
+  if (messages.length === 0) return null;
+
+  return (
+    <section
+      id="testimonials"
+      style={{
+        padding: "100px 48px",
+        position: "relative",
+        zIndex: 1,
+        borderTop: "1px solid rgba(201,169,110,0.1)",
+      }}
+    >
+      <ScrollReveal>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "64px" }}>
+            <p
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "11px",
+                letterSpacing: "0.4em",
+                color: "#c9a96e",
+                textTransform: "uppercase",
+                marginBottom: "20px",
+              }}
+            >
+              VOICES OF THE VOYAGE
+            </p>
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontWeight: 700,
+                fontSize: "clamp(32px, 5vw, 56px)",
+                color: "rgba(232,232,232,0.95)",
+                marginBottom: "16px",
+                lineHeight: 1.15,
+              }}
+            >
+              Our Happy Visitors
+            </h2>
+            <div
+              style={{
+                width: "60px",
+                height: "1px",
+                background:
+                  "linear-gradient(90deg, transparent, #c9a96e, transparent)",
+                margin: "0 auto",
+              }}
+            />
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gap: "32px",
+            }}
+          >
+            {messages.map((m, i) => {
+              const key = `${m.name}-${i}`;
+              return (
+                <ScrollReveal key={key} delay={i * 80}>
+                  <div
+                    data-ocid={`testimonials.item.${i + 1}`}
+                    style={{
+                      background: "rgba(201,169,110,0.05)",
+                      border: "1px solid rgba(201,169,110,0.2)",
+                      padding: "36px 32px 28px",
+                      position: "relative",
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "16px",
+                        left: "24px",
+                        fontFamily: "Georgia, serif",
+                        fontSize: "64px",
+                        lineHeight: 1,
+                        color: "rgba(201,169,110,0.2)",
+                        userSelect: "none",
+                      }}
+                    >
+                      &ldquo;
+                    </span>
+                    <p
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontStyle: "italic",
+                        fontWeight: 300,
+                        fontSize: "18px",
+                        lineHeight: 1.75,
+                        color: "rgba(232,232,232,0.75)",
+                        marginTop: "32px",
+                        marginBottom: "24px",
+                      }}
+                    >
+                      {m.message}
+                    </p>
+                    <div
+                      style={{
+                        borderTop: "1px solid rgba(201,169,110,0.15)",
+                        paddingTop: "16px",
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontVariant: "small-caps",
+                          fontSize: "14px",
+                          letterSpacing: "0.15em",
+                          color: "#c9a96e",
+                          margin: 0,
+                        }}
+                      >
+                        — {m.name}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </ScrollReveal>
+    </section>
+  );
+}
+
 // ── Footer ────────────────────────────────────────────────────────────────────
 function Footer() {
   const navLinks = [
@@ -2081,6 +2227,7 @@ export default function App() {
           <ProtectSection />
           <QuoteSection />
           <VisitorSignupSection />
+          <VoicesSection />
         </main>
         <Footer />
       </div>
